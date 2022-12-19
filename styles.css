@@ -16,7 +16,6 @@ h1 {
 
 p {
     color: white;
-    padding: 20px;
 }
 
 .container {
@@ -80,4 +79,10 @@ p {
     box-shadow: 0 0 2px lightgreen;
     transition: transform 150ms;
     transform: scale(1.03);
+}
+
+.btn[disabled]:hover {
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
 }
