@@ -75,4 +75,9 @@ p {
     color: white;
 }
 
-#highscore-btn {}
+#highscore-btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 2px lightgreen;
+    transition: transform 150ms;
+    transform: scale(1.03);
+}
