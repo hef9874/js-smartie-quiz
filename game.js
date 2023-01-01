@@ -1,10 +1,10 @@
-var question = document.querySelector("#question");
-var choices = document.querySelectorAll(".choice-text");
-var progressText = document.querySelectorAll("#progressText");
-var scoreText = document.querySelectorAll("#score");
-var progressBarFull = document.querySelectorAll("#progressBarFull");
+const question = document.querySelector("#question");
+const choices = document.querySelectorAll(".choice-text");
+const progressText = document.querySelectorAll("#progressText");
+const scoreText = document.querySelectorAll("#score");
+const progressBarFull = document.querySelectorAll("#progressBarFull");
 
-var currentQuestion = {}
+var currentQuestion = {};
 
 var acceptingAnswers = true;
 var score = 0; 
@@ -19,7 +19,7 @@ var questions = [
         choice3: "Alert",
         choice4: "Numbers",
         answer: 3,
-    }
+    },
     {
         question: "Where do you place the JavaScript link in the HTML file?",
         choice1: "In the <head> section",
@@ -27,7 +27,7 @@ var questions = [
         choice3: "Below the </html> tag",
         choice4: "In the top of the <body> section",
         answer: 2,
-    }
+    },
     {
         question: "Which is NOT a way to name a variable?",
         choice1: "var",
@@ -38,26 +38,68 @@ var questions = [
     }
 ]
 
-var scorePoints = 100;
-var maxQuestions = 3;
+const scorePoints = 100;
+const maxQuestions = 3;
 
-function startGame() {
+startGame = () => {
     questionCounter = 0
     score = 0
     availableQuestions = [...questions]
-    return getNewQuestion()
+    getNewQuestion()
 }
 
-function getNewQuestion() {
+getNewQuestion = () => {
     if(availableQuestions.length === 0 || questionCounter > maxQuestions) {
-        localStorage.setItem("mostRecentScore", score)
+        localStorage.setItem('mostRecentScore', score)
 
         return window.location.assign('/end.html')
     }
+
     questionCounter++
-    progressText.innerText = `Question ${questionCounter} of ${maxQuestions}`;
-    progressBarFull.style.width = `${(questionCounter/maxQuestions) * 100}%`;
-    var questionsIndex = Math.floor(Math.random() * availableQuestions.length);
-    currentQuestion = availableQuestions[questionsIndex];
+    progressText.innerText = `Question ${questionCounter} of ${maxQuestions}`
+    progressBarFull.style.width = `${(questionCounter/maxQuestions) * 100}%`
+    
+    var questionsIndex = Math.floor(Math.random() * availableQuestions.length)
+    currentQuestion = availableQuestions[questionsIndex]
     question.innerText = currentQuestion.question
+
+    choices.forEach(choice => {
+        var number = choice.dataset['number']
+        choice.innertext = currentQuestion ['choice' + number]
+    })
+
+    availableQuestions.splice(questionsIndex, 1)
+
+    acceptingAnswers = true
 }
+
+//selecting choices and timer 
+choices.forEach(choice => {
+    choice.addEventListener('click', event => {
+        if(!acceptingAnswers) return
+
+        acceptingAnswers = false
+        var selectedChoice = event.target
+        var selectedAnswer = selectedChoice.dataset['number']
+
+        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
+
+        if(classToApply === 'correct') {
+            incrementScore(scorePoints)
+        }
+
+        selectedChoice.parentElement.classList.add(classToApply)
+
+        setTimeout(() => {
+            selectedChoice.parentElement.classList.remove(classToApply)
+            getNewQuestion()
+        }, 1000)
+        })
+    })
+
+    incrementScore = num => {
+        score +- num
+        scoreText.innerText = score
+    }
+
+    startGame()
