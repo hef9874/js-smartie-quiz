@@ -1,0 +1,12 @@
+body {
+    color: white;
+}
+
+#highScoresList {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.highScore {
+    margin-bottom: 5px;
+}
