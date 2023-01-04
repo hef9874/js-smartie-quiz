@@ -2,6 +2,10 @@ body {
     color: white;
 }
 
+header {
+    padding-left: 40px;
+}
+
 .choice-container {
     display: flex;
     margin-bottom: 5px;
@@ -24,6 +28,7 @@ body {
 
 .choice-text {
     padding: 5px;
+    width: 100%;
 }
 
 .correct {

@@ -1,4 +1,4 @@
-const question = document.getElementById('question');
+const question = document.querySelector('#question');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
@@ -8,9 +8,9 @@ var currentQuestion = {};
 var acceptingAnswers = true;
 var score = 0; 
 var questionCounter = 0; 
-var availableQuestions = []
+var availableQuestions = [];
 
-var questions = [
+let questions = [
     {
         question: 'Commonly used data types do NOT inlude:',
         choice1: 'Boolean',
@@ -20,19 +20,19 @@ var questions = [
         answer: 3,
     },
     {
-        question: "Where do you place the JavaScript link in the HTML file?",
-        choice1: "In the <head> section",
-        choice2: "In the bottom of the <body> section",
-        choice3: "Below the </html> tag",
-        choice4: "In the top of the <body> section",
+        question: 'Where do you place the JavaScript link in the HTML file?',
+        choice1: 'In the <head> section',
+        choice2: 'In the bottom of the <body> section',
+        choice3: 'Below the </html> tag',
+        choice4: 'In the top of the <body> section',
         answer: 2,
     },
     {
-        question: "Which is NOT a way to name a variable?",
-        choice1: "var",
-        choice2: "const",
-        choice3: "let",
-        choice4: "make",
+        question: 'Which is NOT a way to name a variable?',
+        choice1: 'var',
+        choice2: 'const',
+        choice3: 'let',
+        choice4: 'make',
         answer: 4,
     }
 ]
