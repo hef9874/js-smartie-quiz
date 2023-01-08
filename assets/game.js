@@ -1,4 +1,4 @@
-const question = document.querySelector('#question');
+const question = document.getElementById('question');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
@@ -10,10 +10,12 @@ var score = 0;
 var questionCounter = 0; 
 var availableQuestions = [];
 
+// console.log(Array.from(document.querySelectorAll('.choice-text')));
+
 let questions = [
     {
         question: 'Commonly used data types do NOT inlude:',
-        choice1: 'Boolean',
+        choice1: 'Boolean', 
         choice2: 'String',
         choice3: 'Alert',
         choice4: 'Numbers',
@@ -37,8 +39,8 @@ let questions = [
     }
 ]
 
-const SCORE_POINTS = 100;
-const MAX_QUESTIONS = 3;
+const scorePoints = 100;
+const maxQuestions = 3;
 
 startGame = () => {
     questionCounter = 0
@@ -48,15 +50,15 @@ startGame = () => {
 }
 
 getNewQuestion = () => {
-    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+    if(availableQuestions.length === 0 || questionCounter > maxQuestions) {
         localStorage.setItem('mostRecentScore', score)
 
         return window.location.assign('end.html')
     }
 
     questionCounter++
-    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
-    progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
+    progressText.innerText = `Question ${questionCounter} of ${maxQuestions}`
+    progressBarFull.style.width = `${(questionCounter/maxQuestions) * 100}%`
 
     //Which question to ask
     
@@ -86,7 +88,7 @@ choices.forEach(choice => {
         let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
 
         if(classToApply === 'correct') {
-            incrementScore(SCORE_POINTS)
+            incrementScore(scorePoints)
         }
 
         selectedChoice.parentElement.classList.add(classToApply)

@@ -19,9 +19,11 @@ h1 {
     padding: 20px; 
 }
 
-h2 {
+h3 {
     color: white;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+
 }
 
 p {
