@@ -3,12 +3,24 @@ const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
 const progressBarFull = document.getElementById("progressBarFull");
+var timeSecond = 90;
+const timeH = document.getElementById('header');
 
 var currentQuestion = {};
 var acceptingAnswers = true;
 var score = 0; 
 var questionCounter = 0; 
 var availableQuestions = [];
+
+timeH.innerHTML = '00:${timeSecond}';
+
+const countdown = setInterval(() => {
+    timeSecond--;
+    timeH.innerHTML = ('00:', timeSecond);
+    if(timeSecond<0 || timeSecond<1) {
+        clearInterval(countdown);
+    }
+},1000)
 
 // console.log(Array.from(document.querySelectorAll('.choice-text')));
 
